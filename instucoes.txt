@@ -1,0 +1,7 @@
+Instruções de Uso: 
+Adiocionar pontos de controle:
+	Clicar na tela
+Editar curva:
+	Ao clicar num ponto de controle existente, a cor dele ficará verde (essa cor indica o ponto atualmente selecionado)
+	Para mover basta segurar o botão do mouse e arrastar
+	Para editar a espessura do ponto basta usar as setas (ArrowUp e ArrowDown).
