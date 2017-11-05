@@ -100,23 +100,6 @@ function resizeCanvas() {
 }
 
 
-canvas.addEventListener('mousedown', e => {
-  var click = {x: e.offsetX, y: e.offsetY, e:espessuraDefault};
-  index = getIndex(click);
-  if (index === -1) {
-    numeroPontos = numeroPontos + 1;
-    points.push(click);
-    pontoAtual = numeroPontos - 2;
-    drawPoints();
-  } else {
-    move = true;
-    pontoAtual = index;
-  }
-
-
-  
-
-});
 
 function dist(p1, p2) {
   var v = {x: p1.x - p2.x, y: p1.y - p2.y};
@@ -309,4 +292,28 @@ canvas.addEventListener('mousemove', e => {
 
 canvas.addEventListener('mouseup', e => {
   move = false;
+});
+
+
+canvas.addEventListener('dblclick', e => {
+    if (index !== -1) {
+        points.splice(index, 1);
+        numeroPontos--;
+    }
+});
+
+
+canvas.addEventListener('mousedown', e => {
+  var click = {x: e.offsetX, y: e.offsetY, e:espessuraDefault};
+  index = getIndex(click);
+  if (index === -1) {
+    numeroPontos = numeroPontos + 1;
+    points.push(click);
+    pontoAtual = numeroPontos - 2;
+    drawPoints();
+  } else {
+    move = true;
+    pontoAtual = index;
+  }
+  
 });
