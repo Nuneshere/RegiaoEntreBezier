@@ -99,7 +99,10 @@ function resizeCanvas() {
   canvas.height = parseFloat(window.getComputedStyle(canvas).height);
 }
 
-
+$('#num_avaliacoes').on('change',function(event){//Funcao para editar o numero de avaliações
+	numeroTestes = (event.target.value); 
+	drawPoints();
+})
 
 function dist(p1, p2) {
   var v = {x: p1.x - p2.x, y: p1.y - p2.y};
@@ -118,44 +121,55 @@ function getIndex(click) {
 function drawPoints() {
   //desenha todos os pontos
   for (var i in points) {
-    ctx.beginPath();
-    ctx.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI);
-    if(i != pontoAtual) {
-	    ctx.fillStyle = 'red';
-    } else {
-	    ctx.fillStyle = 'green';
+    if(comCurva1 === true){	
+	    ctx.beginPath();
+	    ctx.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI);
+	    if(i != pontoAtual) {
+		    ctx.fillStyle = 'red';
+	    } else {
+		    ctx.fillStyle = 'green';
+		}
 	}
     ctx.fill();
 
     //ligando os pontos
-    if(i > 0){
-      var xAtual = points[i-1].x;
-      var yAtual = points[i-1].y;
-      ctx.moveTo(xAtual, yAtual);
-      ctx.lineTo(points[i].x, points[i].y);
-      ctx.stroke();
-    }
+    if(comCurva2 === true){
+	    if(i > 0){
+	      var xAtual = points[i-1].x;
+	      var yAtual = points[i-1].y;
+	      ctx.moveTo(xAtual, yAtual);
+	      ctx.lineTo(points[i].x, points[i].y);
+	      ctx.stroke();
+	    }
+	}
+
+
+
+
   }
 
   if(numeroPontos > 2) {
 	  novosPontos();
-  
-	  for (var i in pointsUp) {
-	    ctx.beginPath();
-	    ctx.arc(pointsUp[i].x, pointsUp[i].y, 5, 0, 2 * Math.PI);
-	    ctx.fillStyle = 'yellow';
-	    ctx.fill();
+	  	if(comCurva1 === true){
+		  for (var i in pointsUp) {
+		    ctx.beginPath();
+		    ctx.arc(pointsUp[i].x, pointsUp[i].y, 5, 0, 2 * Math.PI);
+		    ctx.fillStyle = 'yellow';
+		    ctx.fill();
 
-	  }
+		  }
 
-	  for (var i in pointsDown) {
-	    ctx.beginPath();
-	    ctx.arc(pointsDown[i].x, pointsDown[i].y, 5, 0, 2 * Math.PI);
-	    ctx.fillStyle = 'black';
-	    ctx.fill();
+		  for (var i in pointsDown) {
+		    ctx.beginPath();
+		    ctx.arc(pointsDown[i].x, pointsDown[i].y, 5, 0, 2 * Math.PI);
+		    ctx.fillStyle = 'black';
+		    ctx.fill();
 
-	  }
+		  }
+	}
+	if(comCurva3 === true){
 	  calcularPontosCurva();
+	}
 
 	}
 }
@@ -317,3 +331,41 @@ canvas.addEventListener('mousedown', e => {
   }
   
 });
+
+
+var comCurva1 = true;
+function comCurvachange1(){
+    if (comCurva1===true){
+        comCurva1 = false;
+
+    }else if ( comCurva1 ===false){
+        comCurva1 = true;
+
+    } 
+}
+
+
+
+var comCurva2 = true;
+function comCurvachange2(){
+    if (comCurva2===true){
+        comCurva2 = false;
+
+    }else if ( comCurva2 ===false){
+        comCurva2 = true;
+
+    } 
+}
+
+var comCurva3 = true;
+function comCurvachange3(){
+    if (comCurva3===true){
+        comCurva3 = false;
+
+    }else if ( comCurva3 ===false){
+        comCurva3 = true;
+
+    } 
+}
+
+
